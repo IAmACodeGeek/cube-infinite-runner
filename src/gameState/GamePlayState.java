@@ -13,6 +13,7 @@ import game.GameWindow;
 import level.BackGround;
 import level.Cube;
 import level.Floor;
+import level.obstacles.ObstacleGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +31,7 @@ public class GamePlayState implements GameState {
 	BackGround bg;
 	Floor floor;
 	Cube cube;
+	ObstacleGenerator obsGenerator;
 	boolean playerIsDead = false;
 	
 	public GamePlayState() {
@@ -46,6 +48,8 @@ public class GamePlayState implements GameState {
 				new HashMap<String, int[][]>(Map.of(Animation.IDLE, Constants.cubeIdleSizes, Animation.JUMP, Constants.cubeJumpSizes, Animation.DESTROY, Constants.cubeDestroySizes)), 
 				Constants.cubeIdleSizes[0][0], Constants.cubeIdleSizes[0][1], floor, 20, 25);
 		floor.setScrollSpeed((int)cube.getVelocityX());
+		
+		obsGenerator = new ObstacleGenerator(0, 0, 1500, floor.getY(), cube.getVelocityX(), 1);
 	}
 
 	@Override
@@ -54,7 +58,8 @@ public class GamePlayState implements GameState {
 			bg.update();
 			floor.update();
 			cube.update();
-			// Check if player is dead
+			obsGenerator.update();
+			playerIsDead = obsGenerator.checkCubeDead(cube);
 		}
 		else {
 			GameStateManager.gsm.getCurrentState().destroy();
@@ -66,12 +71,14 @@ public class GamePlayState implements GameState {
 		bg.destroy();
 		floor.destroy();
 		cube.destroy();
+		obsGenerator.destroy();
 		bgClip.close();
 	}
 	
 	@Override
 	public void draw(Graphics g) {
 		bg.draw(g);
+		obsGenerator.draw(g);
 		cube.draw(g);
 		floor.draw(g);
 		
