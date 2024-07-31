@@ -49,7 +49,10 @@ public class MenuState implements GameState {
 	
 	@Override
 	public void keyPressed(int keyCode) {
-		
+		if(keyCode == KeyEvent.VK_SPACE) {
+			GameStateManager.gsm.getCurrentState().destroy();
+			GameStateManager.gsm.setState(GameStateManager.GAME_PLAY_STATE);
+		}
 	}
 
 	@Override
@@ -60,7 +63,10 @@ public class MenuState implements GameState {
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		
+		if(playButton.checkPressed(e.getX(), e.getY())) {
+			GameStateManager.gsm.getCurrentState().destroy();
+			GameStateManager.gsm.setState(GameStateManager.GAME_PLAY_STATE);
+		}
 	}
 
 	@Override

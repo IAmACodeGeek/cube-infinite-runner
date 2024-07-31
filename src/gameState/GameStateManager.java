@@ -37,6 +37,9 @@ public class GameStateManager implements KeyListener, MouseListener{
 		if(currentState.equals(MENU_STATE)) {
 			currentGameState = new MenuState();
 		}
+		else if(currentState.equals(GAME_PLAY_STATE)) {
+			currentGameState = new GamePlayState();
+		}
 	}
 	
 	public GameState getCurrentState() {
