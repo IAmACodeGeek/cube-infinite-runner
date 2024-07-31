@@ -17,21 +17,26 @@ public class GameStateManager implements KeyListener, MouseListener{
 	private GameState currentGameState;
 	
 	public GameStateManager() {
-		
+		currentGameState = new MenuState();
 	}
 	
 	public void update() {
-		if(currentGameState != null)
-			currentGameState.update();
+		currentGameState.update();
 	}
 	
 	public void draw(Graphics g) {
-		if(currentGameState != null)
-			currentGameState.draw(g);
+		currentGameState.draw(g);
 	}
 	
 	public String getState() {
 		return currentState;
+	}
+	
+	public void setState(String state) {
+		currentState = state;
+		if(currentState.equals(MENU_STATE)) {
+			currentGameState = new MenuState();
+		}
 	}
 	
 	public GameState getCurrentState() {
