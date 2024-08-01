@@ -47,7 +47,15 @@ public class GamePlayState implements GameState {
 		floor = new Floor(Constants.bgURL, GameWindow.WIDTH * 2, GameWindow.HEIGHT, 0, 350);
 		
 		HashMap<String, String[]> cubeURLs;
-		cubeURLs = new HashMap<String, String[]>(Map.of(Animation.IDLE, Constants.cubeIdle1, Animation.JUMP, Constants.cubeJump1, Animation.DESTROY, Constants.cubeDestroy1));
+		if(GameStateManager.gsm.spriteIndex == 1) {
+			cubeURLs = new HashMap<String, String[]>(Map.of(Animation.IDLE, Constants.cubeIdle1, Animation.JUMP, Constants.cubeJump1, Animation.DESTROY, Constants.cubeDestroy1));
+		}
+		else if(GameStateManager.gsm.spriteIndex == 2){
+			cubeURLs = new HashMap<String, String[]>(Map.of(Animation.IDLE, Constants.cubeIdle2, Animation.JUMP, Constants.cubeJump2, Animation.DESTROY, Constants.cubeDestroy2));
+		}
+		else {
+			cubeURLs = new HashMap<String, String[]>(Map.of(Animation.IDLE, Constants.cubeIdle3, Animation.JUMP, Constants.cubeJump3, Animation.DESTROY, Constants.cubeDestroy3));
+		}
 		
 		cube = new Cube(cubeURLs, 
 				new HashMap<String, int[][]>(Map.of(Animation.IDLE, Constants.cubeIdleSizes, Animation.JUMP, Constants.cubeJumpSizes, Animation.DESTROY, Constants.cubeDestroySizes)), 

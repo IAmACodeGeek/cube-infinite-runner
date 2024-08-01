@@ -11,8 +11,9 @@ public class GameStateManager implements KeyListener, MouseListener{
 	
 	public static final String MENU_STATE = "MENU_STATE";
 	public static final String GAME_PLAY_STATE = "GAME PLAY STATE";
-	public static final String CHANGE_SPRITE_STATE = "CHANGE SPRITE STATE";
+	public static final String SPRITE_CHANGE_STATE = "SPRITE CHANGE STATE";
 	
+	public int spriteIndex = 1;
 	private String currentState;
 	private GameState currentGameState;
 	
@@ -39,6 +40,9 @@ public class GameStateManager implements KeyListener, MouseListener{
 		}
 		else if(currentState.equals(GAME_PLAY_STATE)) {
 			currentGameState = new GamePlayState();
+		}
+		else if(currentState.equals(SPRITE_CHANGE_STATE)) {
+			currentGameState = new SpriteChangeState();
 		}
 	}
 	

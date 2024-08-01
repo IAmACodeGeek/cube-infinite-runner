@@ -6,6 +6,7 @@ public class Constants {
 
 	public static final String titleURL = "resources/images/com/title.png";
 	public static final String playButtonURL = "resources/images/com/play-button.png";
+	public static final String changeSpriteButtonURL = "resources/images/com/help-button.png";
 	
 	public static final String[] cubeIdle1 = {"resources/images/cube/cube-1/0.png"};
 	public static final String[] cubeIdle2 = {"resources/images/cube/cube-2/0.png"};

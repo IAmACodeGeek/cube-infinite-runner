@@ -12,7 +12,7 @@ import level.BackGround;
 
 public class MenuState implements GameState {
 	private BackGround bg;
-	private ImageButton playButton, titleLogo;
+	private ImageButton playButton, changeSpriteButton, changeSpriteButton1, titleLogo;
 	
 	public MenuState() {
 		// Set Background
@@ -26,6 +26,12 @@ public class MenuState implements GameState {
 		titleLogo = new ImageButton(Constants.titleURL, 350, 50);
 		titleLogo.setPosition((GameWindow.WIDTH - titleLogo.getWidth()) / 2, playButton.getY() - titleLogo.getHeight()*2);
 	
+		changeSpriteButton = new ImageButton(Constants.changeSpriteButtonURL, (int) (playButton.getWidth() * 0.7), (int) (playButton.getHeight() * 0.7));
+		changeSpriteButton.setPosition(playButton.getX() - changeSpriteButton.getWidth() - 60, playButton.getY() + 15);
+
+		changeSpriteButton1 = new ImageButton(Constants.changeSpriteButtonURL, (int) (playButton.getWidth() * 0.7), (int) (playButton.getHeight() * 0.7));
+		changeSpriteButton1.setPosition(playButton.getX() + playButton.getWidth() + 60, playButton.getY() + 15);
+
 	}
 
 	@Override
@@ -38,6 +44,8 @@ public class MenuState implements GameState {
 		bg.draw(g);
 		titleLogo.draw(g);
 		playButton.draw(g);
+		changeSpriteButton.draw(g);
+		changeSpriteButton1.draw(g);
 		
 	}
 
@@ -45,6 +53,8 @@ public class MenuState implements GameState {
 	public void destroy() {
 		bg.destroy();
 		playButton.destroy();
+		changeSpriteButton.destroy();
+		changeSpriteButton1.destroy();
 	}
 	
 	@Override
@@ -66,6 +76,12 @@ public class MenuState implements GameState {
 		if(playButton.checkPressed(e.getX(), e.getY())) {
 			GameStateManager.gsm.getCurrentState().destroy();
 			GameStateManager.gsm.setState(GameStateManager.GAME_PLAY_STATE);
+		}
+		else if(changeSpriteButton.checkPressed(e.getX(), e.getY())) {
+			GameStateManager.gsm.setState(GameStateManager.SPRITE_CHANGE_STATE);
+		}
+		else if(changeSpriteButton1.checkPressed(e.getX(), e.getY())) {
+			GameStateManager.gsm.setState(GameStateManager.SPRITE_CHANGE_STATE);
 		}
 	}
 
