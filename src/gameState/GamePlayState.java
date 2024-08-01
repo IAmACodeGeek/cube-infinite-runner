@@ -24,7 +24,12 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class GamePlayState implements GameState {
 	Clip bgClip;
@@ -50,6 +55,8 @@ public class GamePlayState implements GameState {
 		floor.setScrollSpeed((int)cube.getVelocityX());
 		
 		obsGenerator = new ObstacleGenerator(0, 0, 1500, floor.getY(), cube.getVelocityX(), 1);
+	
+		loadHighScore();
 	}
 
 	@Override
@@ -68,6 +75,7 @@ public class GamePlayState implements GameState {
 	}
 	
 	public void destroy() {
+		saveHighScore();
 		bg.destroy();
 		floor.destroy();
 		cube.destroy();
@@ -88,6 +96,8 @@ public class GamePlayState implements GameState {
 		String currentScoreText = "Current Score: " + cube.getcurrentScore();
         g.drawString(currentScoreText, 450, 80);
         
+        String highScoreText = "High Score: " + cube.getHighScore();
+        g.drawString(highScoreText, 40, 80);        
 	}
 	
 	private void startMusic() {
@@ -113,6 +123,25 @@ public class GamePlayState implements GameState {
 			e.printStackTrace();
 		}
 	}
+	
+	private void loadHighScore() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(Constants.highScoreURL))) {
+            String line = reader.readLine();
+            if (line != null) {
+                cube.setHighScore(Integer.parseInt(line.trim()));
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	private void saveHighScore() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Constants.highScoreURL))) {
+            writer.write(String.valueOf(cube.getHighScore()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 	
 	@Override
 	public void keyPressed(int keyCode) {

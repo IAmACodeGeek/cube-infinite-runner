@@ -32,4 +32,5 @@ public class Constants {
 	public static final int[] bulletSize = {20, 10};
 	
 	public static final String bgMusicURL = "resources/audios/bg-music.wav";
+	public static final String highScoreURL = "src/level/highScore.txt";
 }
