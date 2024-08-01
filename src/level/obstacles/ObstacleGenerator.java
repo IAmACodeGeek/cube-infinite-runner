@@ -58,7 +58,10 @@ public class ObstacleGenerator extends GameObject implements Entity{
 			obstacles.add(vl);
 		}
 		else if(no > 5) {
-			// Create Gun
+			Gun gun = new Gun(new HashMap<String, String[]>(Map.of(Animation.IDLE, Constants.gunIdle)), 
+					new HashMap<String, int[][]>(Map.of(Animation.IDLE, Constants.gunIdleSizes)), 
+					Constants.gunIdleSizes[0][0], Constants.gunIdleSizes[0][1], getX(), getY() - 45, velocityX);
+			obstacles.add(gun);
 		}
 	}
 

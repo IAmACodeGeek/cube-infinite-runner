@@ -46,7 +46,7 @@ public class GamePlayState implements GameState {
 		
 		cube = new Cube(cubeURLs, 
 				new HashMap<String, int[][]>(Map.of(Animation.IDLE, Constants.cubeIdleSizes, Animation.JUMP, Constants.cubeJumpSizes, Animation.DESTROY, Constants.cubeDestroySizes)), 
-				Constants.cubeIdleSizes[0][0], Constants.cubeIdleSizes[0][1], floor, 20, 25);
+				Constants.cubeIdleSizes[0][0], Constants.cubeIdleSizes[0][1], floor, 15, 25);
 		floor.setScrollSpeed((int)cube.getVelocityX());
 		
 		obsGenerator = new ObstacleGenerator(0, 0, 1500, floor.getY(), cube.getVelocityX(), 1);
